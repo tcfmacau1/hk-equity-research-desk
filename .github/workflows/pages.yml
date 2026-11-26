@@ -4,28 +4,34 @@ on:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pages: write
-  id-token: write
 concurrency:
-  group: pages
+  group: pages-release
   cancel-in-progress: false
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - uses: actions/configure-pages@v5
       - run: node scripts/pages.mjs
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: public
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - name: Update the static release branch
+        run: |
+          git fetch origin gh-pages
+          git worktree add -b publish-site release FETCH_HEAD
+          rsync -a --delete --exclude=.git public/ release/
+          touch release/.nojekyll
+          git -C release config user.name github-actions
+          git -C release config user.email github-actions[bot]@users.noreply.github.com
+          git -C release add -A
+          if ! git -C release diff --cached --quiet; then
+            git -C release commit -m "Publish frontend ${GITHUB_SHA}"
+            git -C release push origin HEAD:gh-pages
+          fi
+      - name: Request a Pages build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/${GITHUB_REPOSITORY}/pages/builds"
