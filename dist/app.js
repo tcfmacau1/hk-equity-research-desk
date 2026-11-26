@@ -42,7 +42,10 @@ function draw(){
  else{let rs=selected();body='<div class="pagehead"><div class="eyebrow">'+sub[page]+'</div><h1>'+navs[page]+'</h1></div>';
  if(page===2){body+=cards;let c=filters.company||codes[0];rs=all.filter(r=>r.company===c);body+=head('COMPANY PROFILE',c?displayName(c)+' · '+c+'.HK':'暫無追蹤公司',jump(10,'管理名單'))+'<section class="panel">'+(rs.map(r=>info(r,[['基本面','fundamental'],['估值觀察','valuation']])).join('')||empty('暫無紀錄'))+'</section>'}
  else{body+=controls();if(page===1)rs=rs.filter(material);if(page===4)rs.sort((a,b)=>(b.eventDate||b.date).localeCompare(a.eventDate||a.date));if(page===7)rs=rs.filter(r=>!confirmed(r));if(page===9)rs=rs.filter(r=>r.next);body+='<div class="note">'+rs.length+' 筆紀錄</div><section class="panel" style="margin-top:8px">'+(rs.map(r=>page===1||page===7?row(r):page===4?'<div class="detailrow"><span class="eyebrow">事件日期 '+esc(r.eventDate||r.date)+'</span>'+row(r)+'</div>':info(r,({3:[['基本面變化','fundamental'],['估值分析','valuation'],['最近記錄收市價（港元）','close'],['價格日期','priceDate']],5:[[confirmed(r)?'已確認事實':'待核實內容','summary'],['分析推論','inference']],6:[['潛在股價影響','impact'],['主要風險','risk']],8:[['投資決策','decision'],['決策理由','decisionReason']],9:[['下一輪研究','next'],['觀察風險','risk']]}[page]))).join('')||empty(page===7?'目前沒有待核實事項。':'沒有符合條件的紀錄。'))+'</section>'}}
- v.innerHTML=window.researchOffline.render()+body;
+ const enabledAlerts = new Set(window.watchStocks.filter(stock=>stock.alerts).map(stock=>stock.code));
+ const alerts = page===0 ? all.filter(r=>enabledAlerts.has(r.company)&&material(r)).slice(0,5) : [];
+ const alertPanel = alerts.length ? '<section class="panel"><h2>監察名單提醒</h2>'+alerts.map(row).join('')+'</section>' : '';
+ v.innerHTML=window.researchOffline.render()+alertPanel+body;
 }
 window.refreshWatch=()=>window.researchOffline.refresh('watchlist');
 window.saveRecord=(record,base)=>window.researchOffline.put('records',record,base);

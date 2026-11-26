@@ -238,6 +238,6 @@
   window.addEventListener('offline',()=>{state.online=false;onChange()});
   window.addEventListener('online',()=>{if(state.ready)Promise.all(kinds.map(refresh)).then(sync)});
   window.addEventListener('pageshow',()=>{if(state.ready)void sync()});
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&state.ready)void sync()});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&state.ready)void Promise.all(kinds.map(refresh)).then(sync)});
   setInterval(()=>{if(!document.hidden&&state.ready&&state.queue.some(j=>!j.error))void sync()},30000);
 })();
