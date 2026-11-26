@@ -4,6 +4,18 @@
   const pending=new Map();
   const button=document.querySelector('#connect-private');
   const note=document.querySelector('#connection-note');
+  const appleMobile=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(appleMobile){
+    button.textContent='開啟私人工作區';
+    note.textContent='在同一分頁查看及編輯私人研究。';
+    button.onclick=()=>location.assign(origin+'/');
+    window.researchFetch=()=>Promise.reject(new TypeError('請在私人工作區查看及同步研究。'));
+    return;
+  }
+  const fallback=document.createElement('a');
+  fallback.href=origin+'/';
+  fallback.textContent='直接開啟私人工作區';
+  note.after(fallback);
   const disconnected=()=>{ready=false;channel?.close();for(const req of pending.values())req.reject(new TypeError('私人工作區已中斷連線'));pending.clear();button.textContent='連接私人工作區';note.textContent='使用已儲存在本機的研究資料。'};
   button.onclick=()=>{
     if(ready&&popup&&!popup.closed){popup.focus();return;}
