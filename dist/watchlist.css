@@ -1,0 +1,39 @@
+.wl-wrap{display:grid;gap:16px;color:#193b30;--wl-border:#dbe4dc}
+.wl-panel,.wl-archive{background:#fff;border:1px solid var(--wl-border);border-radius:12px}
+.wl-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:20px}
+.wl-heading h2,.wl-formhead h2{margin:0;font-size:20px}
+.wl-heading p{margin:3px 0 0;color:#64786b;font-size:13px}
+.wl-heading h2 span,.wl-archive summary span{font:600 12px/1.6 monospace;display:inline-block;vertical-align:middle;background:#e7f0e6;color:#3f684b;padding:0 7px;border-radius:8px}
+.wl-primary,.wl-primary:hover{background:#226348;color:#fff;border-color:#226348;white-space:nowrap}
+.wl-list{margin:0;padding:0;list-style:none}
+.wl-row{display:grid;grid-template-columns:minmax(110px,1fr) minmax(210px,1.3fr) auto;align-items:center;gap:14px;border-top:1px solid var(--wl-border);padding:14px 20px}
+.wl-identity{display:grid;gap:3px;min-width:0}.wl-identity strong{overflow-wrap:anywhere}
+.wl-identity span{font-size:12px;color:#65786c}
+.wl-channels,.wl-tools{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.wl-switch{display:inline-flex;align-items:center;gap:6px;color:#3e584a;font-size:13px;min-height:42px;border:0;background:transparent;padding:3px 2px}
+.wl-track{display:inline-block;flex:none;width:30px;height:18px;border-radius:10px;border:1px solid #82998a;background:#d5ddd7;position:relative}
+.wl-track::before{content:"";position:absolute;top:2px;left:2px;height:12px;width:12px;border-radius:50%;background:white;border:1px solid #82998a;box-sizing:border-box}
+.wl-switch[aria-checked=true] .wl-track{background:#226348;border-color:#226348}.wl-switch[aria-checked=true] .wl-track::before{left:14px;border-color:white}
+.wl-tools{gap:5px;justify-content:flex-end}.wl-tools button{font-size:13px;min-height:40px}
+.wl-empty{padding:0 20px 18px;margin:0;color:#617465}
+.wl-archive summary{padding:14px 20px;cursor:pointer;font-weight:650}.wl-archive .wl-row{grid-template-columns:1fr auto}
+.wl-feedback{font-size:14px;color:#336847}.wl-feedback:empty{display:none}.wl-feedback[data-error],.wl-formerror{color:#913e28}
+.wl-dialog{padding:0;border:1px solid #d0dbd0;border-radius:16px;width:min(460px,calc(100vw - 28px));max-height:90dvh;overflow:auto;margin:auto;color:#183a2c;background:#fbfcf8;box-shadow:0 20px 70px #17342430}.wl-dialog::backdrop{background:#102a2180}
+.wl-form{padding:22px;display:grid;gap:16px}.wl-formhead,.wl-formfoot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.wl-formhead button{font-size:20px;line-height:1;padding:8px 12px}
+.wl-input{display:grid;gap:5px;font-size:14px}.wl-input input{padding:9px 12px;border-radius:7px;border:1px solid #c3cec3;background:#fff;font-size:16px;color:inherit}.wl-input input:read-only{background:#edf1eb}
+.wl-form fieldset{display:flex;flex-wrap:wrap;gap:6px 18px;border:1px solid #d5dfd5;border-radius:8px;padding:5px 10px 9px}.wl-form legend{font-size:13px;padding:0 3px}.wl-option{display:flex;align-items:center;gap:5px;min-height:40px}.wl-option input{width:17px;height:17px;accent-color:#226348}
+.wl-formfoot{justify-content:flex-end}.wl-form button:disabled,.wl-wrap button:disabled{opacity:.55}
+.wl-formerror{margin:0;font-size:14px}.wl-formerror:empty{display:none}
+@media(max-width:700px){.wl-row{grid-template-columns:minmax(0,1fr) auto;gap:3px 8px;padding:12px 15px}.wl-heading{padding:15px}.wl-heading h2{font-size:17px}.wl-heading .wl-primary{padding:9px;font-size:13px}.wl-channels{grid-column:1/-1;grid-row:2}.wl-tools{grid-column:2;grid-row:1}.wl-switch,.wl-tools button{min-height:44px}}
+@media print{.wl-dialog{display:none!important}}
+
+.wl-stock,.wl-logo-controls{display:flex;align-items:center;gap:10px;min-width:0}
+.wl-stock .mark,.wl-logo-preview .mark{flex-shrink:0}
+:where(.mark){background:#e6eee7;color:#305e4a}
+.mark.wl-custom-logo{overflow:hidden;background:#fff!important;border:1px solid #d9e3da}
+.wl-custom-logo img{display:block;width:100%;height:100%;object-fit:contain}
+.wl-logo-editor{display:grid;gap:6px}.wl-logo-label{font-size:14px}.wl-logo-editor small{color:#65786c;font-size:12px}
+.wl-logo-controls{flex-wrap:wrap}.wl-logo-preview .mark{width:48px;height:48px}
+.wl-file-button{position:relative;overflow:hidden;border:1px solid #c3cec3;background:white;border-radius:7px;padding:8px 13px;cursor:pointer}
+.wl-file-button:focus-within{outline:3px solid #d39341}.wl-file-button input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}

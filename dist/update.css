@@ -1,0 +1,7 @@
+.pwa-update{position:fixed;z-index:1000;bottom:calc(18px + env(safe-area-inset-bottom));right:18px;max-width:min(390px,calc(100vw - 36px));padding:16px 18px;border:1px solid #b7c6bc;background:#fffef9;color:#183c32;border-radius:14px;box-shadow:0 8px 32px #193d292b}
+.pwa-update[hidden],.pwa-update button[hidden]{display:none}
+.pwa-update p{margin:0 0 10px;font-size:14px;line-height:1.6;overflow-wrap:anywhere}
+.pwa-update>div{display:flex;gap:8px}
+.pwa-update button{min-height:40px;padding:6px 14px;font:inherit;font-size:14px;font-weight:600;border:1px solid #b5c8ba;border-radius:9px;cursor:pointer;color:#164735;background:white}
+.pwa-update button.pwa-apply{background:#1e553d;border-color:#1e553d;color:#fff}
+@media print{.pwa-update{display:none!important}}
