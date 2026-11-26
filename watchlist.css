@@ -37,3 +37,8 @@
 .wl-logo-controls{flex-wrap:wrap}.wl-logo-preview .mark{width:48px;height:48px}
 .wl-file-button{position:relative;overflow:hidden;border:1px solid #c3cec3;background:white;border-radius:7px;padding:8px 13px;cursor:pointer}
 .wl-file-button:focus-within{outline:3px solid #d39341}.wl-file-button input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+
+.cloud-account {width:min(90vw,26rem);max-height:85dvh;overflow:auto;border:1px solid #c8d6cb;border-radius:14px;padding:1.25rem;color:#19362b}
+.cloud-account label {display:grid;gap:.3rem;margin:.85rem 0}
+.cloud-account input {width:100%;box-sizing:border-box;font:inherit;padding:.65rem}
+.cloud-account [role=alert] {color:#90421c}
